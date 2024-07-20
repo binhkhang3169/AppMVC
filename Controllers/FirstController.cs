@@ -37,6 +37,7 @@ namespace App.Controllers
 
             return View("xinchao4",userName);
         }
+        [AcceptVerbs("POST","GET")]
         public IActionResult ViewProduct(int? id){
             var product = _productServices.Where(p => p.Id==id).FirstOrDefault();
 

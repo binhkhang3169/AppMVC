@@ -1,0 +1,46 @@
+@inject AppDBContext dbContext
+@using Microsoft.EntityFrameworkCore;
+@{
+    ViewData["title"] = "Du lieu";
+    var connect = dbContext.Database.GetDbConnection();
+    var dbname = connect.Database;
+    var can_connect = dbContext.Database.CanConnect();
+}
+
+
+<h1>Thong tin ve co so du lieu</h1>    
+<p>DBName:@dbname</p>
+<p>Source:@connect.DataSource</p>
+<p>State:@connect.State</p>
+<br>
+<h2>Migrations</h2>
+<ol>
+
+@foreach(var item in dbContext.Database.GetPendingMigrations()){
+ <il>@item</il>   
+ <br>
+}
+
+
+@foreach(var item in dbContext.Database.GetAppliedMigrations()){
+ <il>@item</il>   
+ <br>
+}
+</ol>
+
+@if(!can_connect){
+    <p>Cann't connet to databae</p>
+    <a asp-action="Migration">Tao database</a>
+}
+else{
+    <p>Can connet to database</p>
+
+    <h2>Cac table</h2>
+    await dbContext.Database.OpenConnectionAsync();
+    var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
+    @foreach(System.Data.DataRow row in table.Rows){
+        @row["TABLE_NAME"]
+    }
+    <a asp-action="DeleteDB">Xoa database:@dbname</a>
+}
+

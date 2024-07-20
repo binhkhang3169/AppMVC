@@ -1,0 +1,10 @@
+@model App.Models.PlanetModel
+
+<h1>@Model.Name - @Model.VName</h1>
+
+
+<img src="~/wwwroot/Planet/@(Model.Name).jpg" alt="">
+<p>@Model.Content</p>
+
+
+<a asp-controller="Planet" asp-action="Index">Back</a>
