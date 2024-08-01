@@ -28,6 +28,7 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 });
 builder.Services.AddSingleton<ProductServices, ProductServices>();
 builder.Services.AddSingleton<PlanetService>();
+builder.Services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
 
 //dang ki Identity
 builder.Services.AddIdentity<AppUser, IdentityRole>()
@@ -89,7 +90,12 @@ builder.Services.AddAuthentication()
         // .AddTwitter()
         // .AddMicrosoftAccount()
         ;
+//dangkimail
 
+builder.Services.AddOptions();
+var mailsetting = builder.Configuration.GetSection("MailSettings");
+builder.Services.Configure<MailSettings>(mailsetting);
+builder.Services.AddSingleton<IEmailSender, SendMailService>();
 
 
 

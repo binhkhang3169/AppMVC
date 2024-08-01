@@ -28,8 +28,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Planet" asp-action="Index">Danh sach hanh tinh</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-controller="User" asp-action="Index">Quan ly thanh vien</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-controller="Role" asp-action="Index">Quan ly role</a>
+                        </li>
                     </ul>
                 </div>
+                <partial name="_LoginPartial"/>
             </div>
         </nav>
     </header>
